@@ -44,7 +44,7 @@ var jobName;
                 jenkinsUrl = baseUrl + "/job/" + jobName + "/api/json?callback=?"
 		$("#jobUrl").append(jenkinsUrl)
                 $.getJSON(jenkinsUrl,function(json){
-                        
+                    $("#downstream").append(jenkinsUrl);    
 			$.each(json.results,function(i,tweet){
 			   $("#results").append('<p><img src="'+tweet.profile_image_url+'" widt="48" height="48" />'+tweet.text+'</p>');
 			});

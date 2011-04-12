@@ -80,32 +80,30 @@
         <p>Google Maps balloons! Content is provided by a hidden div on the page. Note the use of centerPointX to adjust where the spike extends from. We're also using a close-box "x" image in the content which is a javascript link to close the tip.</p>
          <hr />
       <div id="example-17-content" class="gmap">
-        <div class="gmap-title">Build job:</div>
+        <div class="gmap-title">Build Job</div>
         <div class="gmap-addr">
-          <div>123 Main St.</div>
-          <div>Seekonk, MA 02771</div>
+          <div><a href="job/green">job/green</a></div><hr/>
         </div>
         
         <div class="gmap-bottom">
           <div>Get directions: <a href="javascript:void(null);">To here</a> - <a href="javascript:void(null);">From here</a></div>
-          <div><a href="javascript:void(null);">Search nearby</a> - <a href="javascript:void(null);">Save to My Maps</a></div>
-          <div><a href="javascript:void(null);">Edit</a></div>
+          <div><a href="javascript:void(null);">Search nearby</a> -
         </div>
         <a href="javascript:void($('#example17').btOff());"><img src="demofiles/close.gif" alt="close" width="12" height="12" class="gmap-close" /></a>
       </div>
 
         <div class="source">
           <div class="js">$('#example-17-content').hide();
-$('#example17').bt({
+$('#example17').btOn({
   positions: 'top',
   contentSelector: "$('#example-17-content')", /*hidden div*/
-  trigger: 'click',
+  trigger: 'hover',
   width: 220,
   centerPointX: .9,
   spikeLength: 65,
   spikeGirth: 40,
   padding: 15,
-  cornerRadius: 25,
+  cornerRadius: 5,
   fill: '#FFF',
   strokeStyle: '#ABABAB',
   strokeWidth: 1

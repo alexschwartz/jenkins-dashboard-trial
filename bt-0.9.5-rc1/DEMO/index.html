@@ -71,52 +71,7 @@
     </div>
    </div>
     
- 
-    <div class="example" id="complex-animation">
-      <h3>Complex Animation</h3>
-      <div class="ie-fix"><div type="text" id="example20" class="target" title="Animations are a bit complicated, but very flexible.">hover</div></div>
-      <div class="desc">
-        <p>At the time that <code>showTip</code> is triggered, the tip is hidden (display: none) but completely built, positioned, and ready to go. If we want to animate its position, size, or other attributes, we need to create variables representing the current attributes so that we know where to end our animation. In this example, we're animating the size of the canvas (the bitmap drawing of the tip) as well as it's left and top position so that it remains centered as its size animates.</p>
-        <p>In order to keep the animation efficient, the content (the text) is hidden during the animation and appears after the animation is finished.</p>
-        <p><code>hideTip</code> works in reverse. The <em>callback</em> gets called at the end of the animation to cleanup the box, removing it from the DOM and getting things ready for the next time the tip is triggered.</p>
-        <div class="source">
-          <div class="js">$('#example20').bt({
-  showTip: function(box){
-    var $content = $('.bt-content', box).hide(); /* hide the content until after the animation */
-    var $canvas = $('canvas', box).hide(); /* hide the canvas for a moment */
-    var origWidth = $canvas[0].width; /* jQuery's .width() doesn't work on canvas element */
-    var origHeight = $canvas[0].height;
-    $(box).show(); /* show the wrapper, however elements inside (canvas, content) are now hidden */
-    $canvas
-      .css({width: origWidth * .5, height: origHeight * .5, left: origWidth * .25, top: origHeight * .25, opacity: .1})
-      .show()
-      .animate({width: origWidth, height: origHeight, left: 0, top: 0, opacity: 1}, 400, 'easeOutBounce',
-        function(){$content.show()} /* show the content when animation is done */
-        );
-  },
-  /* when using hideTip, do NOT forget 'callback' at end of animation */
-  hideTip: function(box, callback){
-    var $content = $('.bt-content', box).hide();
-    var $canvas = $('canvas', box);
-    var origWidth = $canvas[0].width;
-    var origHeight = $canvas[0].height;
-    $canvas
-      .animate({width: origWidth * .5, height: origHeight * .5, left: origWidth * .25, top: origHeight * .25, opacity: 0}, 400, 'swing', callback); /* callback */
-  },
-  
-  /* other options */
-  shrinkToFit: true,
-  hoverIntentOpts: {
-    interval: 0,
-    timeout: 0
-  }
-});</div>
-        </div>
-      </div>
-    </div>
-    
-    
-    
+     
     
     <div class="example" id="google-maps">
       <h3>Google Maps</h3>
@@ -161,46 +116,7 @@ $('#example17').bt({
     
     
  
-    
-    <div class="example" id="hulu">
-      <h3>Hulu style</h3>
-      <div class="ie-fix"><div type="text" id="hulu-target" class="target">hover</div></div>
-      <div id="hulu-content">
-        <b>BeautyTips:</b> Pretty Tooltips For jQuery<br />
-        Season 1, Ep. 1 (00:48)<br />
-        Air date: 05/20/2009  |  Rated: TV-14  |  ☆☆☆☆☆<br />
-        <hr />
-        Call them tooltips, talk bubbles, or help balloons, we're making them quick and pretty - without any graphics slicing or careful CSS layering.
-      </div>
-      <div class="desc">
-        <p><a href="http://www.hulu.com">Hulu</a> style. Use Safari or Firefox 3.5+ to get the full effect with the drop shadow.</p>
-        <div class="source">
-          <div class="js">$('#hulu-content').hide();
-$('#hulu-target').bt({
-  contentSelector: "$('#hulu-content')",
-  positions: ['right', 'left'],
-  fill: '#F4F4F4',
-  strokeStyle: '#666666', 
-  spikeLength: 20,
-  spikeGirth: 10,
-  width: 350,
-  overlap: 0,
-  centerPointY: 1,
-  cornerRadius: 0, 
-  cssStyles: {
-    fontFamily: '"Lucida Grande",Helvetica,Arial,Verdana,sans-serif', 
-    fontSize: '12px',
-    padding: '10px 14px'
-  },
-  shadow: true,
-  shadowColor: 'rgba(0,0,0,.5)',
-  shadowBlur: 8,
-  shadowOffsetX: 4,
-  shadowOffsetY: 4
-});</div>
-        </div>
-      </div>
-    </div>
+
 
   </div> <!-- /.examples -->
   

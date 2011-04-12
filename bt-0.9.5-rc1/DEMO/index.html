@@ -28,48 +28,7 @@
 </head>
 <body>
 <div id="page">
-  <div id="intro">
-    <h1>BeautyTips Demo</h1>
-    <p><img src="demofiles/logo.png" alt="BeautyTips" width="240" height="200" style="float:right;margin-left:10px;margin-bottom:5px" />BeautyTips is a jQuery tooltips plugin which uses the canvas drawing
-      element
-      in the HTML5 spec to dynamically draw tooltips (sometimes called &quot;talk bubbles&quot; or &quot;help balloons&quot;)
-      associated with a html element on the page. These tips are highly configurable and can be triggered in many different ways.</p>
-    <p> The canvas element is supported in modern versions of FireFox, Safari,
-      and Opera. However, Internet Explorer needs a separate library called ExplorerCanvas
-      included on the page in order to support canvas drawing functions. <a href="http://excanvas.sourceforge.net/">ExplorerCanvas</a>
-      was created by Google for use with their web apps and you can find it <a href="http://excanvas.sourceforge.net/">here</a>.</p>
-    <p>BeautyTips was written to be simple to use and pretty. All of its options
-      are documented at the bottom of the .js file and defaults can be overwritten
-      globally for the entire page, or individually for each target element (more about this in the wrap up section).</p>
-    <p>BeautyTips has been tested with jQuery 1.2.6 and 1.3 on Firefox 3.x, Safari 3.x (also works on iPhone!), IE 6.x+, and Opera 8+, but I'm sure other canvas-capable browsers will work as well.</p>
-    <p> By default each tooltip will be positioned on the side of the target
-      element
-      which has the most free space. This is affected by the scroll position
-      and
-      size of the current window, so each Beauty Tip is redrawn each time it
-      is
-      displayed. It may appear above an element at the bottom of the page, but
-      when
-      the page is scrolled down (and the element is at the top of the page) it
-      will appear below it. Additionally, positions can be forced or a preferred
-      order can be defined. See examples below.</p>
-    <h2>Project Page and Download</h2>
-    <p>BeautyTips has <a href="http://plugins.jquery.com/project/bt">a page</a> in the plugins directory on jQuery.com. This is where you can download the latest version. It is also the best place to post bugs and feature requests.</p>
-    <p><a href="http://plugins.jquery.com/project/bt">http://plugins.jquery.com/project/bt</a></p>
-    <h2>Other helpful plugins</h2>
-    <p>To fix z-index problems with form elements in IE6, include the <a href="http://plugins.jquery.com/project/bgiframe">bgiframe plugin</a> on your page. BeautyTips will automatically
-      recognize it and use it.</p>
-    <p>BeautyTips also works with the <a href="http://cherne.net/brian/resources/jquery.hoverIntent.html">hoverIntent plugin</a>
-      see hoverIntent example below for usage.</p>
-    <h2>Usage</h2>
-      <p>The function can be called in a number of ways.<br>
-      <code>$(selector).bt();</code><br>
-      <code>$(selector).bt('Content text');</code><br>
-      <code>$(selector).bt('Content text', {option1: value, option2: value});</code><br>
-      <code>$(selector).bt({option1: value, option2: value});</code></p>
-    <h2>Versions</h2>
-      This demo page is using version <strong><script>document.write($().jquery);</script> </strong> of jQuery and version <strong><script>document.write($.bt.version);</script></strong> of BeautyTips.
-      
+
     <h2>Examples</h2>
     <p><small>Note: html and javascript textareas are live. Feel free to experiment with the code and see how BeautyTips are affected.</small></p>
   </div><!-- /#intro -->
@@ -609,27 +568,6 @@ $('#hulu-target').bt({
     </div>
 
   </div> <!-- /.examples -->
-  
-  <div id="wrapup">
-    <h2>Options</h2>
-    <p>A full list of options can be found at the bottom of the <a href="../jquery.bt.js" type="text/plain">jquery.bt.js</a> file itself. Scroll to the bottom of the file to see the list of options along with their default values and a short descriptions of what each one does.</p>
-    <p>These defaults can be overridden during each call to the $.bt() function (as in the examples above) or they can be overridden globally for all BeautyTips on the page. For instance, to change the ajax loading content for all BeautyTips on the page, you could insert the following code into your document's &lt;head&gt; (somewhere after &lt;script src=&quot;jquery.bt.js&quot;...):</p>
-    <blockquote><code>&lt;script language="JavaScript"&gt;<br/>
-    jQuery.bt.options.ajaxLoading = '&lt;img src="/images/throbber.gif" width="40" height="40" /&gt;';<br />
-    jQuery.bt.options.closeWhenOthersOpen = true;<br />
-    &lt;/script&gt;</code></blockquote>
-    <h2>Wrap up</h2>
-    <p>Found bugs and/or want to contribute to development? Please use the <a href="http://plugins.jquery.com/project/issues/bt">issue queue on jQuery.com</a>.</p>
-    <p><strong>Twitter</strong>: I tend to post about BeautyTips development on Twitter, so <a href="http://twitter.com/jjeff">follow me</a> if you'd like to keep up with the latest news.</p>
-    <p><strong>IRC</strong>: I also tend to hang out in the <a href="irc://irc.freenode.net/%23jquery">#jQuery IRC room</a> (username: jjeff). If you've got quick questions about BeautyTips, try to find me there.</p>
-    <p>Is BeautyTips saving you money and development time on your project? Do you feel compelled to reward its developer for his hard work and encourage further development? Well you could certainly buy him something from <a href="http://www.amazon.com/wishlist/3EBX4VIIOGJX1">his Amazon wish list</a>.</p>
-    <p>It's always encouraging to hear from people using BeautyTips for cool and/or notable things. Just send a note to <script type="text/javascript"><!--
-document.write('<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;'+'&#106;&#101;&#102;&#102;@'+'&#108;&#117;&#108;&#108;&#97;&#98;&#111;&#116;&#46;&#99;&#111;&#109;&#63;&#115;&#117;&#98;&#106;&#101;&#99;&#116;&#61;&#73;&#32;&#76;&#111;&#118;&#101;&#32;&#66;&#101;&#97;&#117;&#116;&#121;&#84;&#105;&#112;&#115;'+'">'+'&#106;&#101;&#102;&#102;&#64;&#108;&#117;&#108;&#108;&#97;&#98;&#111;&#116;&#46;&#99;&#111;&#109;'+'</a>');
-//-->
-</script>. I'd love to hear from you. <small>Please do not email me with support requests. Those should go to the <a href="http://plugins.jquery.com/project/issues/bt">issue queue</a>.</small></p>
-
-    <p>- Jeff Robbins</p>
-  </div>
   
 </body>
 </html>

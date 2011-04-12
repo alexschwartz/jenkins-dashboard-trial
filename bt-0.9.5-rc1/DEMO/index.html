@@ -405,62 +405,6 @@ $('#example14').bt({
     </div>
     
     
-    <div class="example" id="shadows">
-    <h3>Drop Shadows</h3>
-    <div id="example19" class="target">hover</div>
-    <div class="desc">
-    <p>Drop shadows are part of the canvas spec, but they are not implemented by many browsers. Drop shadows currently only work in Safari and Firefox 3.5 and higher. Eventually I would like to create canvas-drawn drop shadows that should work in all browsers, but for the time being, keep in mind that these won't work in all browsers. However, for these non-drop-shadow browsers, you can define "no shadow options" (noShadowOpts) to define how the tip should be displayed if shadows aren't supported.</p>
-    <div class="source">
-      <div class="js">$('#example19').bt('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis.',
-  {
-    fill: '#FFF',
-    cornerRadius: 10,
-    strokeWidth: 0,
-    shadow: true,
-    shadowOffsetX: 3,
-    shadowOffsetY: 3,
-    shadowBlur: 8,
-    shadowColor: 'rgba(0,0,0,.9)',
-    shadowOverlap: false,
-    noShadowOpts: {strokeStyle: '#999', strokeWidth: 2},
-    positions: ['left', 'top']
-  });</div>
-    </div></div>
-    </div>
-    
-    
-    
-    
-    <div class="example" id="netflix">
-      <h3>Netflix style</h3>
-      <div class="ie-fix"><div type="text" id="example13" class="target">hover</div></div>
-      <div class="desc">
-        <p><a href="http://www.netflix.com">Netflix</a>-style big descriptive popups using ajax.</p>
-        <div class="source">
-          <div class="js">$('#example13').bt({
-  ajaxPath: 'demofiles/netflix.html',
-  centerPointY: .1,
-  positions: ['right', 'left'], 
-  padding: 0, 
-  width: 256, 
-  spikeGirth: 60, 
-  spikeLength: 50, 
-  cornerRadius: 10, 
-  fill: '#FFF', 
-  strokeStyle: '#B9090B', 
-  shadow: true, 
-  shadowBlur: 12,
-  shadowOffsetX: 0,
-  shadowOffsetY: 5, 
-  hoverIntentOpts: {interval: 800, timeout: 0}, 
-  cssStyles: {
-    fontSize: '12px',
-    fontFamily: 'arial,helvetica,sans-serif'
-  }
-});</div>
-        </div>
-      </div>
-    </div>
     
     
     <div class="example" id="google-maps">
@@ -468,9 +412,9 @@ $('#example14').bt({
       <div class="ie-fix"><img src="demofiles/gmap-pin.png" alt="gmap-pin" title="" width="19" height="32" id="example17" class="alt-target" /></div>
       <div class="desc">
         <p>Google Maps balloons! Content is provided by a hidden div on the page. Note the use of centerPointX to adjust where the spike extends from. We're also using a close-box "x" image in the content which is a javascript link to close the tip.</p>
-        
+         <hr />
       <div id="example-17-content" class="gmap">
-        <div class="gmap-title">Address:</div>
+        <div class="gmap-title">Build job:</div>
         <div class="gmap-addr">
           <div>123 Main St.</div>
           <div>Seekonk, MA 02771</div>
@@ -505,27 +449,7 @@ $('#example17').bt({
     </div>
     
     
-    <div class="example" id="facebook">
-      <h3>Facebook style</h3>
-      <div class="ie-fix"><div type="text" id="example12" class="target" title="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero.">hover</div></div>
-      <div class="desc">
-        <p>Facebook-style.</p>
-        <div class="source">
-          <div class="js">$('#example12').bt({
-  fill: '#F7F7F7', 
-  strokeStyle: '#B7B7B7', 
-  spikeLength: 10, 
-  spikeGirth: 10, 
-  padding: 8, 
-  cornerRadius: 0, 
-  cssStyles: {
-    fontFamily: '"lucida grande",tahoma,verdana,arial,sans-serif', 
-    fontSize: '11px'
-  }
-});</div>
-        </div>
-      </div>
-    </div>
+ 
     
     <div class="example" id="hulu">
       <h3>Hulu style</h3>

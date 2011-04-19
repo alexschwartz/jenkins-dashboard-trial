@@ -66,12 +66,15 @@ function parseColor(jenkinsColorCode) {
 }
 
 function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callback) {
-	var jobUrl = $(this).attr('href')
-    var jobId = jobUrl.split('/').last();
-    var jsonUrl = jobUrl + '/api/json?jsonp=?'
-    var thisLink = $(this)
+	var jobId = jenkinsJobUrl.split('/').last();
+    var jsonUrl = jenkinsJobUrl + '/api/json?jsonp=?'
     
     $(this).attr('title2', 'jenkins job ' + jobId + ", url: " + jsonUrl);             
+
+    $("#statusbar").append("retrieving(" + jsonUrl + ")");
+    $("#statusbar").append("starting request");
+
+    
     $.getJSON(jsonUrl, callback);
 }
 
@@ -93,16 +96,8 @@ $(document).ready(function(){
         $(".jenkinsJobLink").each(function(index) {
             var jobUrl = $(this).attr('href')
             var thisLink = $(this)
-            
-            var jobId = jobUrl.split('/').last();
-            var jsonUrl = jobUrl + '/api/json?jsonp=?'
-            
-              
-            $(this).attr('title2', 'jenkins job ' + jobId + ", url: " + jsonUrl);             
-            $("#statusbar").append("retrieving(" + jsonUrl + ")");
-            $("#statusbar").append("starting request");
-            
-            $.getJSON(jsonUrl, function(json) {
+          
+            retrieveJsonForJenkinsJobURL(jobUrl, function(json) {
                 var color = json.color
                 $("#statusbar").append(" ## got callback: " + color); 
                 alert("got callback. this:" + jobId);

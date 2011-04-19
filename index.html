@@ -3,6 +3,16 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <title>Seitenränder - marginwidth, marginheight, topmargin, leftmargin</title>
+<style>
+.jenkinsJobStatusWidget {
+background: #669933;
+position: relative;
+margin: 10px;
+padding: 0px;
+width: 50px;
+height: 10px;
+}
+</style>
 </head>
 <body marginwidth="50" marginheight="100" topmargin="100" leftmargin="50">
 <h3>Input Data</h3>
@@ -34,33 +44,68 @@ Hudson/Jenkins Job Name:
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
 
 <h3>My Job</h3>
-<div id="jenkinsJob1" style="background-color:#FFFF66">
-   a
+<div class="jenkinsJobStatusWidget" id="job1">job1
 </div>
-<div>job1</div>
+<div class="jenkinsJobStatusWidget" id="job2">job2
+</div>
+<div class="jenkinsJobStatusWidget" id="job3">job3
+</div>
+
+<div>
+   <ul>
+   <li><a class="jenkinsJobLink" id="jenkinsLLink#componentA" href="http://localhost:8080/job/componentA">componentA</a></li>
+   <li><a class="jenkinsJobLink" id="jenkinsLLink#green" href="http://localhost:8080/job/green">green</a></li>
+  </ul>
+</div>
+
 
 <script type="text/javascript">
+function parseColor(jenkinsColorCode) {
+
+    var color;
+	switch (jenkinsColorCode) {
+	  case "blue":
+	      return "rgb(15, 99, 30)"; 
+	  case "red":
+	      return "#FF0000"; 
+      case "blue_anim":
+      case "red_anim":
+      case "grey_anim":
+          return"yellow";
+	  default:
+	      return "grey";
+	 }; 
+}
+
+
+Array.prototype.last = function() {return this[this.length-1];}
+
+
 $(document).ready(function(){
 var baseUrl;
 var jobName;
 	$('button').click(function(){
+
+		$(".jenkinsJobLink").each(function(index) {
+              var jobUrl = $(this).attr('href')
+              var jobId = jobUrl.split('/').last();
+              var jsonUrl = jobUrl + '/api/json?jsonp=?'
+              var thisLink = $(this)
+              $(this).attr('title2', 'jenkins job ' + jobId + ", url: " + jsonUrl);             
+              $.getJSON(jsonUrl, function(json) {
+                  alert("got callback. this:" + jobId);
+                  thisLink.attr('title', 'jenkins job ' + jobId + "color: " + json.color)
+              });
+	      });
+        
 		baseUrl = $("#baseUrl").val();
                 jobName = $("#jobName").val();
                 jenkinsUrl = baseUrl + "/job/" + jobName + "/api/json?jsonp=?"
 		$("#jobUrl").append(jenkinsUrl)
                 $("#downstream").append("starting request");
                 $.getJSON(jenkinsUrl, function(json) {
-                    $("#downstream").append("got callback: " + json.color); 
-                    var color;
-                    switch (json.color) {
-  case "blue":
-    color = "rgb(15, 99, 30)"; break;
-  case "red":
-    color= "#FF0000"; break;
-  default:
-    alert("Sie bleiben leider dumm");
-    break;
- }; 
+                    var color = parseColor(json.color)
+                    $("#downstream").append("got callback: " + color); 
                     $("#jenkinsJob1").css('background-color',color);
 		});
 	});

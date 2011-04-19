@@ -92,7 +92,7 @@
 $('#example17').bt({
   positions: 'top',
   contentSelector: "$('#example-17-content')", /*hidden div*/
-  trigger: 'hover',
+  trigger: 'click',
   width: 220,
   centerPointX: .9,
   spikeLength: 65,
@@ -101,7 +101,13 @@ $('#example17').bt({
   cornerRadius: 5,
   fill: '#FFF',
   strokeStyle: '#ABABAB',
-  strokeWidth: 1
+  strokeWidth: 1,
+   preBuild:         function(){$('#example-17-content').append("  - prebuild -");
+                        }, 
+  showTip:          function(box){
+                        $('#example-17-content').append("nice");
+                        $(box).show();
+                      },
 });</div>
         </div>
       </div>

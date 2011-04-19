@@ -29,15 +29,17 @@ height: 10px;
 <h3>My Job</h3>
 <div class="jenkinsJobStatusWidget" id="job1">job1
 </div>
-<div class="jenkinsJobStatusWidget" id="job2">job2
+<div class="jenkinsJobStatusWidget" id="job2a">job2
 </div>
 <div class="jenkinsJobStatusWidget" id="job3">job3
 </div>
 
 <div>
    <ul>
-   <li><a class="jenkinsJobLink" id="jenkinsLLink#componentA" href="http://localhost:8080/job/componentA">componentA</a></li>
-   <li><a class="jenkinsJobLink" id="jenkinsLLink#green" href="http://localhost:8080/job/green">green</a></li>
+   <li><a class="jenkinsJobLink" href="http://localhost:8080/job/componentA">componentA</a></li>
+   <li><a class="jenkinsJobLink" href="http://localhost:8080/job/green">green</a></li>
+   <li><a class="jenkinsJobLink" href="http://localhost:8080/job/componentCC">componentCC</a></li>
+   <li><a class="jenkinsJobLink" href="http://localhost:8080/job/green2">green2</a></li>
   </ul>
 </div>
 
@@ -74,40 +76,37 @@ function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callback) {
     $("#statusbar").append("retrieving(" + jsonUrl + ")");
     $("#statusbar").append("starting request");
 
-    
-    $.getJSON(jsonUrl, callback);
+    $.getJSON(jsonUrl, function(json) {
+        callback(jobId, jenkinsJobUrl, json);
+    });
 }
 
 Array.prototype.last = function() {return this[this.length-1];}
 
+function updateAllJenkinsLinks() {
+    $(".jenkinsJobLink").each(function(index) {
+      var jobUrl = $(this).attr('href')
+      var thisLink = $(this)
+  
+      retrieveJsonForJenkinsJobURL(jobUrl, function(jobId,jenkinsJobUrl,json) {
+        var jsonStatusColorCode = json.color
+        var color = parseColor(jsonStatusColorCode)
+        //$("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', color='" + jsonStatusColorCode + "'"); 
+        thisLink.attr('title', 'jenkins job ' + jobId + "color: " + json.color);
+        thisLink.css('color', color);
+      });
+   });
+}
+
+var secondsToReload = 2;
+
+var auto_refresh = setInterval(function () {
+    $("#statusbar").append(".");
+    updateAllJenkinsLinks();
+}, 2*1000); // refresh every x*1000 milliseconds
 
 
-$(document).ready(function(){
+$(document).ready(updateAllJenkinsLinks);
 
-    var secondsToReload = 2;
-    
-    var auto_refresh = setInterval(function () {
-        $("#statusbar").append(".");
-    }, 2*1000); // refresh every x*1000 milliseconds
-     
-   
-
-   
-        $(".jenkinsJobLink").each(function(index) {
-            var jobUrl = $(this).attr('href')
-            var thisLink = $(this)
-          
-            retrieveJsonForJenkinsJobURL(jobUrl, function(json) {
-                var color = json.color
-                $("#statusbar").append(" ## got callback: " + color); 
-                alert("got callback. this:" + jobId);
-                thisLink.attr('title', 'jenkins job ' + jobId + "color: " + json.color)
-            });
-        });
-    
-
- 
-
-});
 </script>
 </body></html>

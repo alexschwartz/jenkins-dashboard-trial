@@ -65,13 +65,30 @@ function parseColor(jenkinsColorCode) {
 	 }; 
 }
 
+function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callback) {
+	var jobUrl = $(this).attr('href')
+    var jobId = jobUrl.split('/').last();
+    var jsonUrl = jobUrl + '/api/json?jsonp=?'
+    var thisLink = $(this)
+    
+    $(this).attr('title2', 'jenkins job ' + jobId + ", url: " + jsonUrl);             
+    $.getJSON(jsonUrl, callback);
+}
 
 Array.prototype.last = function() {return this[this.length-1];}
 
 
+
 $(document).ready(function(){
-var baseUrl;
-var jobName;
+
+    var secondsToReload = 2;
+    
+    var auto_refresh = setInterval(function () {
+        $("#statusbar").append(".");
+    }, 2*1000); // refresh every x*1000 milliseconds
+     
+   
+
 	$('button').click(function(){
 
 		$(".jenkinsJobLink").each(function(index) {
@@ -79,6 +96,7 @@ var jobName;
               var jobId = jobUrl.split('/').last();
               var jsonUrl = jobUrl + '/api/json?jsonp=?'
               var thisLink = $(this)
+              
               $(this).attr('title2', 'jenkins job ' + jobId + ", url: " + jsonUrl);             
               $.getJSON(jsonUrl, function(json) {
                   alert("got callback. this:" + jobId);
@@ -98,13 +116,8 @@ var jobName;
 		});
 	});
 
-    var secondsToReload = 3;
-    
-	var auto_refresh = setInterval(function () {
-		$("#statusbar").append(".");
-        $("#.jenkinsStatusWidget").setClass();
-	}, secondsToReload*1000); // refresh every x*1000 milliseconds
-	    
+ 
+
 });
 </script>
 </body></html>

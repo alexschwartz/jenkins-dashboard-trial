@@ -1,5 +1,17 @@
-status_Building {
-    
+.status_building {
+     background: yellow;
+}
+
+.status_failed {
+     background: red;
+}
+
+.status_successfull {
+     background: green;
+}
+
+.status_unkown {
+     background: gray;
 }
 
 .jenkinsJobStatusWidget {

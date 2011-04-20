@@ -1,13 +1,27 @@
-function parseColor(jenkinsColorCode) {
+function getStatusFromJenkinsColorCode(jenkinsColorCode) {
 
     switch (jenkinsColorCode) {
       case "blue":
-          return "rgb(15, 99, 30)"; 
+          return "successful"; 
       case "red":
-          return "#FF0000"; 
+          return "failed"; 
       case "blue_anim":
       case "red_anim":
       case "grey_anim":
+          return"building";
+      default:
+          return "unkown";
+    }; 
+}
+
+function status2color(status) {
+
+    switch (status) {
+      case "successful":
+          return "rgb(15, 99, 30)"; 
+      case "failed":
+          return "#FF0000"; 
+      case "building":
           return"yellow";
       default:
           return "grey";
@@ -37,15 +51,16 @@ function updateAllJenkinsLinks() {
   
       retrieveJsonForJenkinsJobURL(jobUrl, function(jobId,jenkinsJobUrl,json) {
         var jsonStatusColorCode = json.color
-        var color = parseColor(jsonStatusColorCode)
+        var status = getStatusFromJenkinsColorCode(jsonStatusColorCode)
         //$("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', color='" + jsonStatusColorCode + "'"); 
-        thisLink.attr('title', 'jenkins job ' + jobId + "color: " + json.color);
+        thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
+        var color = status2color(status);
         thisLink.css('color', color);
       });
    });
 }
 
-var secondsToReload = 2;
+var secondsToReload = 4;
 
 var auto_refresh = setInterval(function () {
     $("#statusbar").append(".");

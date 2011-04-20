@@ -54,10 +54,10 @@ function updateAllJenkinsLinks() {
         var status = getStatusFromJenkinsColorCode(jsonStatusColorCode)
         //$("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', color='" + jsonStatusColorCode + "'"); 
         //thisLink.text(' ');
-        //thisLink.empty().
+        thisLink.remove('.jenkinsJobStatusWidget');
         thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
         thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
-        thisLink.attr('class', 'jenkinsJobLink status_' + status);
+        thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
       });
    });
 }

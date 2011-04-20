@@ -53,9 +53,11 @@ function updateAllJenkinsLinks() {
         var jsonStatusColorCode = json.color
         var status = getStatusFromJenkinsColorCode(jsonStatusColorCode)
         //$("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', color='" + jsonStatusColorCode + "'"); 
+        //thisLink.text(' ');
+        //thisLink.empty().
+        thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
         thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
-        var color = status2color(status);
-        thisLink.css('color', color);
+        thisLink.attr('class', 'jenkinsJobLink status_' + status);
       });
    });
 }

@@ -1,5 +1,6 @@
 .status_building {
      background: yellow;
+     background-image: url(images/pbar-ani.gif)
 }
 
 .status_failed {

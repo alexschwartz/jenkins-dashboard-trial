@@ -37,9 +37,19 @@ function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callback) {
     $("#statusbar").append("retrieving(" + jsonUrl + ")");
     $("#statusbar").append("starting request");
 
-    $.getJSON(jsonUrl, function(json) {
-        callback(jobId, jenkinsJobUrl, json);
-    });
+    $.ajax({
+    	   url: jsonUrl,
+    	   dataType:'json'
+    	   async: true,
+    	   success: function(json) {
+    		        callback(jobId, jenkinsJobUrl, json);
+    	  })
+    	 });
+    
+    //var jqxhr = $.getJSON(jsonUrl, function(json) {
+    //    callback(jobId, jenkinsJobUrl, json);
+    //})
+ 
 }
 
 Array.prototype.last = function() {return this[this.length-1];}
@@ -48,16 +58,18 @@ function updateAllJenkinsLinks() {
     $(".jenkinsJobLink").each(function(index) {
       var jobUrl = $(this).attr('href')
       var thisLink = $(this)
+      $("#statusbar").append("<br/><br/> ## jenkins job " + jobUrl + " <br/>"); 
+        
   
       retrieveJsonForJenkinsJobURL(jobUrl, function(jobId,jenkinsJobUrl,json) {
         var jsonStatusColorCode = json.color
         var status = getStatusFromJenkinsColorCode(jsonStatusColorCode)
-        //$("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', color='" + jsonStatusColorCode + "'"); 
+        $("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', statu='" + jsonStatusColorCode + "' ## "); 
         //thisLink.text(' ');
-        thisLink.remove('.jenkinsJobStatusWidget');
-        thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
+        //thisLink.remove('.jenkinsJobStatusWidget');
+        //thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
         thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
-        thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
+        //thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
       });
    });
 }
@@ -65,9 +77,8 @@ function updateAllJenkinsLinks() {
 var secondsToReload = 4;
 
 var auto_refresh = setInterval(function () {
-    $("#statusbar").append(".");
     updateAllJenkinsLinks();
-}, 2*1000); // refresh every x*1000 milliseconds
+}, secondsToReload*1000); // refresh every x*1000 milliseconds
 
 
 $(document).ready(updateAllJenkinsLinks);

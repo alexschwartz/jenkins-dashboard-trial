@@ -30,7 +30,7 @@ function status2color(status) {
     }; 
 }
 
-function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callback) {
+function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callbackSuccess, callbackFailed) {
     var jobId = jenkinsJobUrl.split('/').last();
     var jsonUrl = jenkinsJobUrl + '/api/json?jsonp=?'
     
@@ -40,12 +40,13 @@ function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callback) {
     $("#statusbar").append("starting request");
 
     if (globalJobStatusUnkown[jobId] == 1) {
-    	alert("unkown job " + jobId)
+    	callbackFailed(jobId)
     }
     
     globalJobStatusUnkown[jobId] = 1;
     $.getJSON(jsonUrl, function(json) {
-        callback(jobId, jenkinsJobUrl, json);
+    	globalJobStatusUnkown[jobId] = 0;
+    	callbackSuccess(jobId, jenkinsJobUrl, json);
     })
  
 }
@@ -57,19 +58,23 @@ function updateAllJenkinsLinks() {
       var jobUrl = $(this).attr('href')
       var thisLink = $(this)
       $("#statusbar").append("<br/><br/> ## jenkins job " + jobUrl + " <br/>"); 
-        
+     
+      
   
-      retrieveJsonForJenkinsJobURL(jobUrl, function(jobId,jenkinsJobUrl,json) {
-        var jsonStatusColorCode = json.color
-        var status = getStatusFromJenkinsColorCode(jsonStatusColorCode)
-        globalJobStatusUnkown[jobId] = 0;
-        $("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', statu='" + jsonStatusColorCode + "' ## "); 
-        //thisLink.text(' ');
-        //thisLink.remove('.jenkinsJobStatusWidget');
-        //thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
-        thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
-        //thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
-      });
+      retrieveJsonForJenkinsJobURL(jobUrl, 
+          function(jobId,jenkinsJobUrl,json) {
+              var jsonStatusColorCode = json.color
+              var status = getStatusFromJenkinsColorCode(jsonStatusColorCode)
+              $("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', statu='" + jsonStatusColorCode + "' ## "); 
+              //thisLink.text(' ');
+              //thisLink.remove('.jenkinsJobStatusWidget');
+              //thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
+              thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
+              //thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
+          },
+          function(jobId,jenkinsJobUrl) {
+        	  alert("unkown + " + jobId)
+          });
    });
 }
 

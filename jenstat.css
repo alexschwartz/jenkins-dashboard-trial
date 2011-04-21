@@ -12,17 +12,21 @@
 }
 
 .status_unkown {
-     background: gray;
+     background: lightgray;
+}
+
+.status_invalid {
+     background: lightgray;
 }
 
 .jenkinsJobLinkBox {
     position: relative;
-    margin: 10px;
+    margin: 0px;
     padding: 0px;
-    min-width: 50px;
-    width: 50px;
-    max-width: 50px;
-    height: 10px;
+    min-width: 100px;
+    width: 100px;
+    max-width: 100px;
+    min-height: 20px;
 }
 
 .jenkinsJobStatusWidget {

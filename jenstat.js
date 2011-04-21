@@ -7,9 +7,9 @@ function getStatusFromJenkinsColorCode(jenkinsColorCode) {
           return "successful"; 
       case "red":
           return "failed"; 
-      case "blue_anim":
-      case "red_anim":
-      case "grey_anim":
+      case "blue_anime":
+      case "red_anime":
+      case "grey_anime":
           return"building";
       default:
           return "unkown";
@@ -33,13 +33,15 @@ function updateJenkinsStatus(jobId, jenkinsJobUrl, thisLink, status) {
 	
 	$("#statusbar").append(" <br/><br/> ** jenkins status: jobId='" + jobId + "', statu='" + status + "' ** "); 
     
-    //thisLink.text(' ');
+    thisLink.text(' ');
     //thisLink.remove('.jenkinsJobStatusWidget');
-    thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
+	if (thisLink.children().size() == 0) {
+        thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
+	}
 	
     thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
     
-    //thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
+    thisLink.children().attr('class', 'jenkinsJobStatusWidget status_' + status);
 
 	
 }
@@ -65,6 +67,7 @@ function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callbackSuccess, callbackFa
 }
 
 Array.prototype.last = function() {return this[this.length-1];}
+
 
 function updateAllJenkinsLinks() {
     $(".jenkinsJobLink").each(function(index) {

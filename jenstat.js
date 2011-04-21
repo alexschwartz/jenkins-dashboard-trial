@@ -29,6 +29,17 @@ function status2color(status) {
           return "grey";
     }; 
 }
+function updateJenkinsStatus(jobId, jenkinsJobUrl, thisLink, status) {
+    //thisLink.text(' ');
+    //thisLink.remove('.jenkinsJobStatusWidget');
+    //thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
+	
+    thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
+    
+    //thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
+
+	
+}
 
 function retrieveJsonForJenkinsJobURL(jenkinsJobUrl, callbackSuccess, callbackFailed) {
     var jobId = jenkinsJobUrl.split('/').last();
@@ -62,18 +73,15 @@ function updateAllJenkinsLinks() {
       
   
       retrieveJsonForJenkinsJobURL(jobUrl, 
-          function(jobId,jenkinsJobUrl,json) {
+          function(jobId,jenkinsJobUrl,json) { // got jenkins job data
               var jsonStatusColorCode = json.color
               var status = getStatusFromJenkinsColorCode(jsonStatusColorCode)
               $("#statusbar").append(" ## jenkins status: jobId='" + jobId + "', statu='" + jsonStatusColorCode + "' ## "); 
-              //thisLink.text(' ');
-              //thisLink.remove('.jenkinsJobStatusWidget');
-              //thisLink.wrapInner('<div class="jenkinsJobStatusWidget" />');
-              thisLink.attr('title', 'jenkins job ' + jobId + " (" + status + ")");
-              //thisLink.children('.jenkinsJobStatusWidget').attr('class', 'jenkinsJobStatusWidget jenkinsJobLink status_' + status);
+              
+              updateJenkinsStatus(jobId, jenkinsJobUrl, thisLink, status)
           },
-          function(jobId,jenkinsJobUrl) {
-        	  alert("unkown + " + jobId)
+          function(jobId,jenkinsJobUrl) { // did not got jenkins job data
+        	  updateJenkinsStatus(jobId, jenkinsJobUrl, thisLink, 'invalid')
           });
    });
 }

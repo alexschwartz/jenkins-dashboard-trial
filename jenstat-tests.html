@@ -1,0 +1,20 @@
+<html>
+<head><title>describe Examples</title>
+<script type="text/javascript" src="https://github.com/airportyh/describe/raw/master/describe.js"></script>
+<script type="text/javascript" src="jenstat.js"></script>
+<script type="text/javascript">
+
+describe('JenStat')
+	.before(function(){
+		
+	})
+	.should('calculate color for given status code', function(){
+		expect(status2Color('successful')).toBe('gray');
+	})
+	
+</script>
+</head>
+<body onload="describe.run({printTo: 'log'})">
+<pre id="log"></pre>
+</body>
+</html>

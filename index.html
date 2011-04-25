@@ -26,38 +26,27 @@
 
 
 <div id="jobs">
-   <p>
-   </p>
+  <script type="text/javascript">
+  var baseUrl = "http://localhost:8080/job/"
+  var jobs = [ "componentA", "green", "componentCC", "green2", "unkown" ];
+
+  createJobLinks($("#jobs"), baseUrl, jobs);
+
+  function createJobLinks(selector,baseUrl,jobs) {
+	  jQuery.each(jobs, function() {
+	      $("#jobs").append('<a class="jenkinsJobLink" href="' + baseUrl + this + '">job ' + this + "</a>");
+	  });
+  }
+  </script>
 </div>
 
 
-<div>
-<a class="jenkinsJobLink" id="1"
-        href="http://localhost:8080/job/componentA">vvv</a>
-        <a class="jenkinsJobLink"
-        href="http://localhost:8080/job/green"></a>
-   <a class="jenkinsJobLink"
-        href="http://localhost:8080/job/componentCC"></a>
-    <a class="jenkinsJobLink"
-        href="http://localhost:8080/job/green2"></a>
-    <a class="jenkinsJobLink"
-        href="http://localhost:8080/job/unkown">vvv</a>
-
-</div>
 
 
 <h2>Debug Output</h2>
 <div id="statusbar"></div>
 
-<script type="text/javascript">
-  var baseUrl = "http://localhost:8080/job/"
-  var arr = [ "one", "two", "three", "four", "five" ];
-  var jobs = [ "componentA", "green", "componentCC", "green2", "unkown" ];
-  jQuery.each(jobs, function() {
-      $("#jobs").append('<a class="jenkinsJobLink" href="' + baseUrl + this + '">job ' + this + "</a>");
-  });
-  alert(" finished ");
-</script>
+
 
 </body>
 </html>

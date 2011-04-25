@@ -1,5 +1,11 @@
 var globalJobStatusUnkown = {};
 
+function createJobLinks(selector,baseUrl,jobs) {
+	  jQuery.each(jobs, function() {
+	      $("#jobs").append('<a class="jenkinsJobLink" href="' + baseUrl + this + '">job ' + this + "</a>");
+	  });
+}
+
 function getStatusFromJenkinsColorCode(jenkinsColorCode) {
 
     switch (jenkinsColorCode) {

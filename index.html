@@ -30,13 +30,13 @@
   var baseUrl = "http://localhost:8080/job/"
   var jobs = [ "componentA", "green", "componentCC", "green2", "unkown" ];
 
-  createJobLinks($("#jobs"), baseUrl, jobs);
+  createJobLinks($("#jobs"), baseUrl, '', jobs);
 
-  function createJobLinks(selector,baseUrl,jobs) {
-	  jQuery.each(jobs, function() {
-	      $("#jobs").append('<a class="jenkinsJobLink" href="' + baseUrl + this + '">job ' + this + "</a>");
-	  });
-  }
+  var prefix = 'componentB-'
+  var stages = [ "stage1", "stage2", "stage3", "stage4", "stage5" ]
+  createJobLinks($("#jobs"), baseUrl, prefix, stages);
+
+
   </script>
 </div>
 

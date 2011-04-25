@@ -21,10 +21,15 @@
 <body marginwidth="50" marginheight="100" topmargin="100"
     leftmargin="50">
 
-<h2>My Status Widgets</h2>
+<h2>Example Pipeline</h2>
 
 
-<h3>My Job</h3>
+
+<div id="jobs">
+   <p>
+   </p>
+</div>
+
 
 <div>
 <a class="jenkinsJobLink" id="1"
@@ -44,6 +49,15 @@
 <h2>Debug Output</h2>
 <div id="statusbar"></div>
 
+<script type="text/javascript">
+  var baseUrl = "http://localhost:8080/job/"
+  var arr = [ "one", "two", "three", "four", "five" ];
+  var jobs = [ "componentA", "green", "componentCC", "green2", "unkown" ];
+  jQuery.each(jobs, function() {
+      $("#jobs").append('<a class="jenkinsJobLink" href="' + baseUrl + this + '">job ' + this + "</a>");
+  });
+  alert(" finished ");
+</script>
 
 </body>
 </html>

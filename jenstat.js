@@ -1,8 +1,9 @@
 var globalJobStatusUnkown = {};
 
-function createJobLinks(selector,baseUrl,jobs) {
+function createJobLinks(selector,baseUrl,prefix,jobs) {
 	  jQuery.each(jobs, function() {
-	      $("#jobs").append('<a class="jenkinsJobLink" href="' + baseUrl + this + '">job ' + this + "</a>");
+		  var jobName = prefix + this
+	      selector.append('<a class="jenkinsJobLink" href="' + baseUrl + jobName + '">job ' + jobName + "</a>");
 	  });
 }
 
